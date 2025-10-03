@@ -20,6 +20,7 @@ export default function MillhouseVeterinary() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
 
   const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5];
 
@@ -188,7 +189,7 @@ export default function MillhouseVeterinary() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button 
-              onClick={() => scrollToSection('contact')}
+              onClick={() => setBookingModalOpen(true)}
               className="bg-white text-[#0b568a] px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl hover:shadow-2xl"
             >
               Book Appointment
@@ -350,22 +351,19 @@ export default function MillhouseVeterinary() {
       </section>
 
       {/* Booking Section */}
-      <section id="booking" className="py-24 bg-white">
+      <section id="booking" className="py-24 bg-gradient-to-br from-[#0b568a] to-[#0d6aa3]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Create a Booking Now</h2>
-            <div className="w-24 h-1 bg-[#0b568a] mx-auto mb-6"></div>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Create a Booking Now</h2>
+            <p className="text-xl text-gray-100 max-w-3xl mx-auto mb-8">
               Schedule your appointment with ease
             </p>
-          </div>
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-            <iframe 
-              src="https://68de9f44defa55573621b1e2--majestic-lebkuchen-aed3d2.netlify.app/" 
-              className="w-full h-[800px] border-0"
-              title="Booking System"
-              allowFullScreen
-            />
+            <button
+              onClick={() => setBookingModalOpen(true)}
+              className="bg-white text-[#0b568a] px-12 py-5 rounded-full text-xl font-bold transition transform hover:scale-105 shadow-2xl hover:shadow-3xl"
+            >
+              Book Appointment
+            </button>
           </div>
         </div>
       </section>
@@ -380,6 +378,36 @@ export default function MillhouseVeterinary() {
           </div>
         </div>
       </footer>
+
+      {/* Booking Modal */}
+      {bookingModalOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* Backdrop with blur */}
+          <div 
+            className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
+            onClick={() => setBookingModalOpen(false)}
+          ></div>
+          
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl h-[75vh] overflow-hidden animate-fadeIn">
+            {/* Close Button */}
+            <button
+              onClick={() => setBookingModalOpen(false)}
+              className="absolute top-4 right-4 z-10 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100 transition"
+            >
+              <X size={24} className="text-gray-700" />
+            </button>
+            
+            {/* Iframe */}
+            <iframe 
+              src="https://68de9f44defa55573621b1e2--majestic-lebkuchen-aed3d2.netlify.app/" 
+              className="w-full h-full border-0"
+              title="Booking System"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
