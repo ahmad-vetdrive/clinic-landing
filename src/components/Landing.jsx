@@ -389,7 +389,7 @@ export default function MillhouseVeterinary() {
           ></div>
           
           {/* Modal Content */}
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl h-[75vh] overflow-hidden animate-fadeIn">
+          <div className="relative bg-white rounded-lg shadow-2xl w-full max-w-2xl h-[75vh] overflow-hidden animate-fadeIn">
             {/* Close Button */}
             <button
               onClick={() => setBookingModalOpen(false)}
@@ -400,7 +400,7 @@ export default function MillhouseVeterinary() {
             
             {/* Iframe */}
             <iframe 
-              src="https://68de9f44defa55573621b1e2--majestic-lebkuchen-aed3d2.netlify.app/" 
+              src="https://majestic-lebkuchen-aed3d2.netlify.app/" 
               className="w-full h-full border-0"
               title="Booking System"
               allowFullScreen
