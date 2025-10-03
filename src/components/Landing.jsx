@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, MapPin, Menu, X, Heart, Shield, Clock } from 'lucide-react';
+import millhouseLogo from '../assets/millhouse-logo.png';
+import heroImage1 from '../assets/hero/5fe8bcd2860eeSplash_00040.jpg';
+import heroImage2 from '../assets/hero/5fe8bcd311ac1Splash_00054.jpg';
+import heroImage3 from '../assets/hero/5fe8bcd35c20dSplash_00062.jpg';
+import heroImage4 from '../assets/hero/5fe8bcd3c7aadSplash_00073.jpg';
+import heroImage5 from '../assets/hero/5fe8bcd3d09baSplash_00074.jpg';
+import alanAdamsImg from '../assets/team/alan adams.jpg';
+import benBarryImg from '../assets/team/ben barry.jpg';
+import carlConnersImg from '../assets/team/carl conners.jpg';
+import deeDesmond from '../assets/team/dee desmond.jpg';
+import frankFaganImg from '../assets/team/frank fagan.jpg';
+import janeJenningsImg from '../assets/team/jane jennings.jpg';
+import kimKennyImg from '../assets/team/kim kenny.jpg';
+import maryMorrisImg from '../assets/team/marry morris.jpg';
+import timTonerImg from '../assets/team/tim toner.jpg';
 
 export default function MillhouseVeterinary() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const heroImages = [heroImage1, heroImage2, heroImage3, heroImage4, heroImage5];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,17 +31,24 @@ export default function MillhouseVeterinary() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [heroImages.length]);
+
   const teamMembers = [
-    { name: "Ben Barry", title: "DVM, Owner" },
-    { name: "Carl Goodwin", title: "Staff Nurse, RVN" },
-    { name: "Frank Pagac", title: "Staff Vet" },
-    { name: "Mary Morris", title: "Staff Nurse, RVN" },
-    { name: "Dee Dachenzie", title: "Veterinary Technician" },
-    { name: "Alee Adams", title: "Staff Nurse, RVN" },
-    { name: "Julie Jennings", title: "Veterinary Assistant" },
-    { name: "Eva Rolfeg", title: "Staff Vet" },
-    { name: "Vivian Hanson", title: "Veterinary Technician" },
-    { name: "Eddie Emerson", title: "Veterinary Assistant" }
+    { name: "Ben Barry", title: "DVM, Owner", image: benBarryImg },
+    { name: "Alan Adams", title: "Staff Nurse, RVN", image: alanAdamsImg },
+    { name: "Carl Conners", title: "Veterinary Technician", image: carlConnersImg },
+    { name: "Dee Desmond", title: "Staff Vet", image: deeDesmond },
+    { name: "Frank Fagan", title: "Senior Veterinarian", image: frankFaganImg },
+    { name: "Jane Jennings", title: "Veterinary Assistant", image: janeJenningsImg },
+    { name: "Kim Kenny", title: "Staff Nurse, RVN", image: kimKennyImg },
+    { name: "Mary Morris", title: "Veterinary Technician", image: maryMorrisImg },
+    { name: "Tim Toner", title: "Practice Manager", image: timTonerImg }
   ];
 
   const scrollToSection = (id) => {
@@ -41,8 +66,15 @@ export default function MillhouseVeterinary() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-3">
-              <div className={`text-2xl font-bold transition-colors ${scrolled ? 'text-[#0b568a]' : 'text-white'}`}>
-                Millhouse Veterinary
+              <div className={`flex items-center space-x-3 ${scrolled ? 'bg-[#0b568a]' : 'bg-transparent'} px-4 py-2 rounded-lg`}>
+                <img 
+                  src={millhouseLogo} 
+                  alt="Millhouse Veterinary" 
+                  className="h-10 w-auto"
+                />
+                <span className="text-xl font-bold text-white hidden sm:block">
+                  Millhouse Veterinary
+                </span>
               </div>
             </div>
             
@@ -128,11 +160,25 @@ export default function MillhouseVeterinary() {
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(135deg, #0b568a 0%, #0d6aa3 100%)' }}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Images Slideshow */}
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{
+              backgroundImage: `url(${image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+        ))}
+        
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-[#0b568a] bg-opacity-60"></div>
+        
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Compassionate Care for Your Beloved Companions
@@ -204,17 +250,20 @@ export default function MillhouseVeterinary() {
               Dedicated professionals committed to your pet's health and happiness
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, index) => (
               <div key={index} className="group">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all transform hover:-translate-y-2">
-                  <div className="relative h-48 flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #0b568a 0%, #0d6aa3 100%)' }}>
-                    <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center text-4xl font-bold text-[#0b568a]">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </div>
+                  <div className="relative h-64 overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b568a] via-transparent to-transparent opacity-60"></div>
                   </div>
                   <div className="p-6 text-center">
-                    <h3 className="text-lg font-bold text-gray-900 mb-1">{member.name}</h3>
+                    <h3 className="text-xl font-bold text-gray-900 mb-1">{member.name}</h3>
                     <p className="text-[#0b568a] font-medium text-sm">{member.title}</p>
                   </div>
                 </div>
@@ -228,7 +277,7 @@ export default function MillhouseVeterinary() {
       <section id="contact" className="py-24 text-white" style={{ background: 'linear-gradient(135deg, #0b568a 0%, #0d6aa3 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Get image.pngIn Touch</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
             <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
             <p className="text-xl text-gray-100 max-w-3xl mx-auto">
               We're here to help with all your pet care needs
@@ -244,7 +293,7 @@ export default function MillhouseVeterinary() {
                   </div>
                   <div>
                     <p className="font-semibold text-lg mb-1">Phone</p>
-                    <a href="tel:08531-87250" className="text-gray-100 hover:text-white transition text-lg">(0853) 87250</a>
+                    <a href="tel:063-81208" className="text-gray-100 hover:text-white transition text-lg">(063) 81208</a>
                   </div>
                 </div>
               </div>
@@ -266,15 +315,18 @@ export default function MillhouseVeterinary() {
                   </div>
                   <div>
                     <p className="font-semibold text-lg mb-1">Address</p>
-                    <p className="text-gray-100">White Horse, Dunlavin, Co. Cork</p>
-                    <p className="text-gray-100">Ireland, P56 YK33</p>
+                    <p className="text-gray-100">Main Street, Charleville, Co. Cork</p>
+                    <p className="text-gray-100">Ireland, P56 HK33</p>
                   </div>
                 </div>
               </div>
               <div className="bg-white bg-opacity-10 rounded-2xl p-6 backdrop-blur-sm">
                 <h4 className="font-semibold text-lg mb-3">Opening Hours</h4>
                 <div className="space-y-2 text-gray-100">
-                  <p>Monday - Friday: 9am to 7pm</p>
+                  <p>Monday, Tuesday: 9am to 6pm</p>
+                  <p>Wednesday: Closed</p>
+                  <p>Thursday: 9am to 7pm</p>
+                  <p>Friday: 9am to 6pm</p>
                   <p>Saturday: 9am to 5pm</p>
                   <p>Sunday: Closed</p>
                 </div>
@@ -282,13 +334,16 @@ export default function MillhouseVeterinary() {
             </div>
 
             <div className="bg-white rounded-3xl overflow-hidden shadow-2xl h-full min-h-96">
-              <div className="w-full h-full flex items-center justify-center bg-gray-100 text-[#0b568a]">
-                <div className="text-center p-8">
-                  <MapPin className="w-16 h-16 mx-auto mb-4" />
-                  <p className="text-lg font-semibold">Map Location</p>
-                  <p className="text-gray-600 mt-2">White Horse, Dunlavin</p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9747.02301873508!2d-8.68431!3d52.356715!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x80b55301ee11b118!2sMillhouse%20Veterinary%20Charleville!5e0!3m2!1sen!2sie!4v1609624191365!5m2!1sen!2sie"
+                width="100%"
+                height="100%"
+                style={{ border: 0, minHeight: '400px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Millhouse Veterinary Location"
+              ></iframe>
             </div>
           </div>
         </div>
