@@ -243,7 +243,7 @@ export default function MillhouseVeterinary() {
       <div id="vetdrive-scheduler-widget">
         <iframe
           src="https://vetschedule.vetdrive.app?clinic_id=692fe27f94641262fcbb16ab"
-          style={{ width: '100%', height: '600px', border: 'none' }}
+          style={{ width: '100%', height: '800px', border: 'none' }}
           title="VetDrive Appointment Scheduler"
           allow="clipboard-write"
         ></iframe>
