@@ -68,9 +68,9 @@ export default function MillhouseVeterinary() {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-3">
               <div className={`flex items-center space-x-3 ${scrolled ? 'bg-[#0b568a]' : 'bg-transparent'} px-4 py-2 rounded-lg`}>
-                <img 
-                  src={millhouseLogo} 
-                  alt="Millhouse Veterinary" 
+                <img
+                  src={millhouseLogo}
+                  alt="Millhouse Veterinary"
                   className="h-10 w-auto"
                 />
                 <span className="text-xl font-bold text-white hidden sm:block">
@@ -78,34 +78,34 @@ export default function MillhouseVeterinary() {
                 </span>
               </div>
             </div>
-            
+
             {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
-              <button 
+              <button
                 onClick={() => scrollToSection('home')}
                 className={`font-medium transition-colors ${scrolled ? 'text-gray-700 hover:text-[#0b568a]' : 'text-white hover:text-gray-200'}`}
               >
                 Home
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className={`font-medium transition-colors ${scrolled ? 'text-gray-700 hover:text-[#0b568a]' : 'text-white hover:text-gray-200'}`}
               >
                 About
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('team')}
                 className={`font-medium transition-colors ${scrolled ? 'text-gray-700 hover:text-[#0b568a]' : 'text-white hover:text-gray-200'}`}
               >
                 Team
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('contact')}
                 className={`font-medium transition-colors ${scrolled ? 'text-gray-700 hover:text-[#0b568a]' : 'text-white hover:text-gray-200'}`}
               >
                 Contact
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('booking')}
                 className={`font-medium transition-colors ${scrolled ? 'text-gray-700 hover:text-[#0b568a]' : 'text-white hover:text-gray-200'}`}
               >
@@ -114,7 +114,7 @@ export default function MillhouseVeterinary() {
             </div>
 
             {/* Mobile menu button */}
-            <button 
+            <button
               className={`md:hidden ${scrolled ? 'text-[#0b568a]' : 'text-white'}`}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
@@ -125,31 +125,31 @@ export default function MillhouseVeterinary() {
           {/* Mobile Navigation */}
           {mobileMenuOpen && (
             <div className="md:hidden pb-4 space-y-2 bg-white rounded-b-lg shadow-lg">
-              <button 
+              <button
                 onClick={() => scrollToSection('home')}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#0b568a] transition"
               >
                 Home
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('about')}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#0b568a] transition"
               >
                 About
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('team')}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#0b568a] transition"
               >
                 Team
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('contact')}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#0b568a] transition"
               >
                 Contact
               </button>
-              <button 
+              <button
                 onClick={() => scrollToSection('booking')}
                 className="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-50 hover:text-[#0b568a] transition"
               >
@@ -166,9 +166,8 @@ export default function MillhouseVeterinary() {
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
             style={{
               backgroundImage: `url(${image})`,
               backgroundSize: 'cover',
@@ -176,10 +175,10 @@ export default function MillhouseVeterinary() {
             }}
           />
         ))}
-        
+
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-[#0b568a] bg-opacity-60"></div>
-        
+
         <div className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             Compassionate Care for Your Beloved Companions
@@ -188,13 +187,13 @@ export default function MillhouseVeterinary() {
             Where professional veterinary excellence meets heartfelt dedication to animal wellbeing
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
+            <button
               onClick={() => setBookingModalOpen(true)}
               className="bg-white text-[#0b568a] px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 shadow-xl hover:shadow-2xl"
             >
               Book Appointment
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('about')}
               className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105 hover:bg-white hover:text-[#0b568a]"
             >
@@ -241,6 +240,15 @@ export default function MillhouseVeterinary() {
         </div>
       </section>
 
+      <div id="vetdrive-scheduler-widget">
+        <iframe
+          src="https://vetschedule.vetdrive.app?clinic_id=692fe27f94641262fcbb16ab"
+          style={{ width: '100%', height: '600px', border: 'none' }}
+          title="VetDrive Appointment Scheduler"
+          allow="clipboard-write"
+        ></iframe>
+      </div>
+
       {/* Meet the Team Section */}
       <section id="team" className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -256,8 +264,8 @@ export default function MillhouseVeterinary() {
               <div key={index} className="group">
                 <div className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all transform hover:-translate-y-2">
                   <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={member.image} 
+                    <img
+                      src={member.image}
                       alt={member.name}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
@@ -284,7 +292,7 @@ export default function MillhouseVeterinary() {
               We're here to help with all your pet care needs
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="space-y-8">
               <div className="bg-white bg-opacity-10 rounded-2xl p-6 hover:bg-opacity-20 transition backdrop-blur-sm">
@@ -383,11 +391,11 @@ export default function MillhouseVeterinary() {
       {bookingModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* Backdrop with blur */}
-          <div 
+          <div
             className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm"
             onClick={() => setBookingModalOpen(false)}
           ></div>
-          
+
           {/* Modal Content */}
           <div className="relative bg-white rounded-lg shadow-2xl w-full max-w-2xl h-[75vh] overflow-hidden animate-fadeIn">
             {/* Close Button */}
@@ -397,10 +405,10 @@ export default function MillhouseVeterinary() {
             >
               <X size={24} className="text-gray-700" />
             </button>
-            
+
             {/* Iframe */}
-            <iframe 
-              src="https://majestic-lebkuchen-aed3d2.netlify.app/" 
+            <iframe
+              src="https://majestic-lebkuchen-aed3d2.netlify.app/"
               className="w-full h-full border-0"
               title="Booking System"
               allowFullScreen
